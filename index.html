@@ -51,8 +51,8 @@ a { text-decoration: none; color: inherit; }
 /* ════════════════════════════════════════
    CURSOR CUSTOM
 ════════════════════════════════════════ */
-#cur { position: fixed; width: 10px; height: 10px; background: var(--wood2); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .25s var(--ease), height .25s var(--ease), background .25s; mix-blend-mode: multiply; }
-#cur-ring { position: fixed; width: 40px; height: 40px; border: 1.5px solid var(--wood); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .4s var(--ease), height .4s var(--ease); }
+#cur { display:none; position: fixed; width: 10px; height: 10px; background: var(--wood2); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .25s var(--ease), height .25s var(--ease), background .25s; mix-blend-mode: multiply; }
+#cur-ring { display:none; position: fixed; width: 40px; height: 40px; border: 1.5px solid var(--wood); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .4s var(--ease), height .4s var(--ease); }
 body.hovering #cur { width: 18px; height: 18px; background: var(--wood3); }
 body.hovering #cur-ring { width: 56px; height: 56px; border-color: var(--wood2); }
 
@@ -334,7 +334,9 @@ h2.head em { font-family: var(--ff-s); font-style: italic; font-weight: 400; col
 
 /* Split calc layout */
 .calc-main { display: grid; grid-template-columns: 1.1fr 1fr; gap: 2rem; align-items: start; }
-.calc-left-box { background: var(--sand); border-radius: 20px; padding: 2rem; border: 1px solid var(--border); }
+.calc-left-box { background: #F7F2EA; border-radius: 20px; padding: 2rem; border: 1px solid #DDD3C0; }
+.cf-title { display: flex; align-items: center; gap: .6rem; font-size: 1.05rem; font-weight: 700; color: var(--ink); margin-bottom: 1.4rem; }
+.cf-title svg { width: 20px; height: 20px; flex-shrink: 0; fill: none; stroke: var(--wood); stroke-width: 1.8; }
 .cf-lbl { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .14em; color: var(--ink3); margin-bottom: .5rem; display: block; }
 .unit-tabs { display: flex; background: var(--white); border: 1.5px solid var(--border); border-radius: 50px; overflow: hidden; margin-bottom: 1.2rem; }
 .utab { flex: 1; padding: .55rem; font-size: .75rem; font-weight: 700; border: none; background: none; cursor: pointer; color: var(--ink3); transition: all .2s; font-family: var(--ff-d); letter-spacing: .03em; border-radius: 50px; }
@@ -363,10 +365,19 @@ h2.head em { font-family: var(--ff-s); font-style: italic; font-weight: 400; col
 
 /* Result card */
 .calc-result-card {
-  background: var(--white); border-radius: 20px; padding: 2rem;
-  border: 2px solid var(--border); transition: border-color .4s; position: sticky; top: 80px;
+  background: #FDFAF5; border-radius: 20px; padding: 2rem;
+  border: 2px solid var(--border); transition: border-color .4s;
+}
+@media(max-width:1000px) {
+  .calc-main { grid-template-columns: 1fr !important; }
+  .calc-left-box { order: 1; }
+  #calc-right-col { order: 2; }
+  .calc-result-card { position: static !important; background: #FDFAF5 !important; }
+  #crc:not(.live) { display: none !important; }
 }
 .calc-result-card.live { border-color: var(--wood2); }
+#crc:not(.live) { display: none !important; }
+#calc-right-col { min-height: 0; }
 .crc-title { font-size: .85rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: var(--ink3); margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
 .crc-empty { text-align: center; padding: 2.5rem 1rem; }
 .crc-empty svg { width: 48px; height: 48px; stroke: var(--border); fill: none; stroke-width: 1.5; margin: 0 auto 1rem; }
@@ -675,8 +686,13 @@ footer { background: var(--ink); padding: 4rem 4% 2.5rem; }
   .testi-grid { grid-template-columns: 1fr; }
   .serv-row { grid-template-columns: 1fr; }
 }
+@media(pointer:fine) {
+  #cur { display:block; }
+  #cur-ring { display:block; }
+}
 @media(max-width:700px) {
   #essG { grid-template-columns: 1fr !important; gap:.8rem !important; }
+
   .nav-links, .nav-tel-btn { display: none; }
   .burger { display: flex; }
   nav { padding: 0 4%; }
@@ -725,11 +741,10 @@ footer { background: var(--ink); padding: 4rem 4% 2.5rem; }
   font-family: 'DM Sans', sans-serif !important;
 }
 
+
+@media (pointer: fine) { #cur { display: block; } #cur-ring { display: block; } }
 </style>
-  <!-- Ecwid Store Script -->
-  <script data-cfasync="false" type="text/javascript"
-    src="https://app.ecwid.com/script.js?135467251&data_platform=code&data_date=2026-04-30"
-    charset="utf-8"></script>
+<!-- Ecwid removed -->
 </head>
 <body>
 
@@ -825,7 +840,7 @@ footer { background: var(--ink); padding: 4rem 4% 2.5rem; }
   <div class="stats-inner">
     <div class="stat r"><span class="stat-n">15+</span><div class="stat-l">Ans d'expérience</div></div>
     <div class="stat r d1"><span class="stat-n">400+</span><div class="stat-l">Projets réalisés</div></div>
-    <div class="stat r d2"><span class="stat-n">8</span><div class="stat-l">Essences disponibles</div></div>
+    <div class="stat r d2"><span class="stat-n">3</span><div class="stat-l">Essences disponibles</div></div>
     <div class="stat r d3"><span class="stat-n">30+</span><div class="stat-l">Pays livrés</div></div>
   </div>
 </div>
@@ -961,7 +976,7 @@ footer { background: var(--ink); padding: 4rem 4% 2.5rem; }
       </div>
 
       <!-- Right: result -->
-      <div>
+      <div id="calc-right-col">
         <div class="calc-result-card" id="crc">
           <div class="crc-title">📋 Votre devis instantané</div>
           <div id="crc-empty" class="crc-empty">
@@ -994,7 +1009,12 @@ footer { background: var(--ink); padding: 4rem 4% 2.5rem; }
           </div>
         </div>
 
-        <div style="margin-top:1.2rem;background:var(--ink2);border-radius:14px;padding:1.4rem 1.6rem;border:1px solid rgba(155,92,26,.2);">
+        
+    </div>
+
+  </div>
+
+    <div id="why-box" style="margin-top:1.2rem;background:var(--ink2);border-radius:14px;padding:1.4rem 1.6rem;border:1px solid rgba(155,92,26,.2);">
           
           
           <div style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:rgba(232,156,74,.7);margin-bottom:.8rem;">Pourquoi choisir Jérôme MENDES ?</div>
@@ -1013,9 +1033,7 @@ footer { background: var(--ink); padding: 4rem 4% 2.5rem; }
             </div>
         </div>
       </div>
-    </div>
 
-  </div>
 </section>
 
 <!-- ════ SERVICES ════ -->
@@ -1561,6 +1579,12 @@ function selE(card) {
 
 function fmt(n) { return n.toFixed(2).replace('.', ',') + ' €'; }
 
+// Hide result column immediately (script runs after DOM is ready)
+(function() {
+  const col0 = document.getElementById('calc-right-col');
+  if (col0) col0.style.display = 'none';
+})();
+
 function calc() {
   const L   = parseFloat(document.getElementById('lon')?.value) || 0;
   const la  = parseFloat(document.getElementById('lar')?.value) || 0;
@@ -1579,6 +1603,8 @@ function calc() {
     if (empty) empty.style.display = 'block';
     if (rows)  rows.style.display  = 'none';
     if (crc)   crc.classList.remove('live');
+  const col2 = document.getElementById('calc-right-col');
+  if (col2) col2.style.display = 'none';
     if (cta)   cta.style.display   = 'none';
     return;
   }
@@ -1613,6 +1639,8 @@ function calc() {
   if (empty) empty.style.display = 'none';
   if (rows)  rows.style.display  = 'block';
   if (crc)   crc.classList.add('live');
+  const col = document.getElementById('calc-right-col');
+  if (col) col.style.display = 'block';
   if (cta)   cta.style.display   = 'flex';
 }
 
